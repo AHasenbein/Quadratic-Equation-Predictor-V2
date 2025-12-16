@@ -12,7 +12,7 @@
 
 ## Research Objectives
 
-1. **Systematic Hyperparameter Optimization**: Conduct comprehensive hyperparameter search using multiple optimization strategies (Bayesian optimization, grid search, random search).
+1. **Systematic Hyperparameter Optimization**: Conduct comprehensive hyperparameter search using multiple optimization strategies (Bayesian optimization, random search).
 
 2. **Architecture Analysis**: Compare different neural network architectures to identify optimal configurations for mathematical function approximation.
 
@@ -27,8 +27,7 @@
 #### Dataset
 - **Training Data**: Synthetic quadratic equations with coefficients in specified ranges
 - **Stratification**: Balanced datasets by root type (real, complex, single root)
-- **Edge Cases**: Special generation for near-zero discriminants and extreme values
-- **Data Quality**: Comprehensive analysis of data distribution and quality metrics
+- **Data Quality**: Comprehensive analysis of data distribution
 
 #### Model Architecture
 - **Base Architecture**: Feedforward neural network
@@ -39,13 +38,12 @@
 #### Hyperparameter Search Space
 - **Architecture**: Hidden layers (1-5), layer sizes (4-128), activation functions (ReLU, Tanh, GELU, Swish, etc.)
 - **Training**: Learning rate (1e-5 to 1e-1), batch size (16-512), optimizer (Adam, AdamW, SGD, RMSprop)
-- **Regularization**: Dropout (0-0.5), weight decay (0-1e-3), batch normalization
+- **Regularization**: Dropout (0-0.5), weight decay (0-1e-3)
 
 #### Optimization Methods
 1. **Bayesian Optimization (Optuna)**: TPE algorithm for intelligent search
-2. **Grid Search**: Exhaustive search on small subspaces
-3. **Random Search**: Random sampling for baseline comparison
-4. **Multi-objective Optimization**: Pareto frontier for accuracy vs efficiency
+2. **Random Search**: Random sampling for baseline comparison
+3. **Multi-objective Optimization**: Pareto frontier for accuracy vs efficiency
 
 ### Evaluation Metrics
 
@@ -60,13 +58,11 @@
 
 #### Efficiency Metrics
 - **Model Size**: Parameters count and memory footprint (MB)
-- **Training Time**: Time to convergence
 - **Inference Speed**: Predictions per second
 
 #### Error Analysis
 - **By Root Type**: Performance on real vs complex roots
 - **Edge Cases**: Near-zero discriminant, extreme coefficients
-- **Statistical Significance**: Confidence intervals and significance testing
 
 ### Experimental Procedure
 
@@ -83,7 +79,6 @@
 - Optimal hyperparameter configurations for different objectives
 - Performance benchmarks (accuracy, speed, size)
 - Trade-off curves and Pareto frontiers
-- Statistical analysis of results
 
 ### Practical Insights
 - "For X% accuracy, use Y architecture"
@@ -91,51 +86,16 @@
 - "Model size can be reduced by 60% with only 2% accuracy loss"
 - "ReLU outperforms Tanh for this mathematical function"
 
-### Methodological Contributions
-- Systematic optimization framework for small ML models
-- Comparison of optimization strategies
-- Evaluation methodology for mathematical ML tasks
-
 ## Limitations
 
-1. **Domain Specificity**: Results are specific to quadratic root prediction; generalization to other mathematical functions needs validation
-
-2. **Data Distribution**: Performance depends on training data distribution; results may vary with different data generation strategies
-
+1. **Domain Specificity**: Results are specific to quadratic root prediction
+2. **Data Distribution**: Performance depends on training data distribution
 3. **Computational Constraints**: Full optimization studies require significant computational resources
-
-4. **Hyperparameter Space**: Search space is limited to common architectures; exotic configurations not explored
+4. **Hyperparameter Space**: Search space is limited to common architectures
 
 ## Future Work
 
 1. **Generalization**: Extend to other mathematical functions (cubic, polynomial, transcendental)
-
-2. **Advanced Architectures**: Explore attention mechanisms, residual connections, and other modern architectures
-
+2. **Advanced Architectures**: Explore attention mechanisms, residual connections
 3. **Transfer Learning**: Investigate transfer learning from simpler to more complex functions
-
 4. **Theoretical Analysis**: Develop theoretical understanding of why certain architectures work better
-
-5. **Real-world Applications**: Apply insights to practical mathematical computation problems
-
-## References
-
-- Optuna: A Next-generation Hyperparameter Optimization Framework (Akiba et al., 2019)
-- Neural Networks for Function Approximation (Hornik et al., 1989)
-- Hyperparameter Optimization: A Survey (Yang & Shami, 2020)
-
-## Data and Code Availability
-
-- All code is available in this repository
-- Experiment results are saved in JSON format
-- Reproducibility: All experiments use fixed random seeds
-
-## Citation
-
-If you use this research or code, please cite:
-
-```
-Quadratic Equation Predictor - Hyperparameter Optimization Research
-[Your Name/Institution]
-[Year]
-```

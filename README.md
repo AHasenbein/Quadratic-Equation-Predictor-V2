@@ -1,149 +1,112 @@
-# Quadratic Equation Predictor - Hyperparameter Optimization Research
+# Hyperparameter Optimization Research: Quadratic Root Prediction
 
-A research-focused application for systematic hyperparameter optimization of neural networks for quadratic root prediction. This project provides practical insights for optimizing small ML models on mathematical function approximation tasks.
+A research-focused project for systematic hyperparameter optimization of neural networks for quadratic root prediction. This project provides practical insights for optimizing small ML models on mathematical function approximation tasks.
 
-## Research Focus
+## Research Question
 
-**Main Research Question**: *"What are the optimal hyperparameters for small neural networks approximating mathematical functions, and what practical insights can we derive for similar problems?"*
-
-This project provides:
-- **Systematic Hyperparameter Optimization**: Bayesian optimization (Optuna), grid search, and random search
-- **Architecture Analysis**: Compare different neural network configurations
-- **Efficiency Trade-offs**: Analyze accuracy vs model size vs speed
-- **Practical Guidelines**: Actionable insights for optimizing small ML models
-
-See [RESEARCH.md](RESEARCH.md) for detailed research documentation.
+**"What are the optimal hyperparameters for small neural networks approximating mathematical functions, and what practical insights can we derive for similar problems?"**
 
 ## Features
 
-### Core Functionality
-- **Page 1: Equation Entry**
-  - Enter quadratic equations with LaTeX display
-  - Real-time graph visualization
-  - Automatic root calculation
+- **Bayesian Optimization (Optuna)**: Intelligent search using TPE algorithm
+- **Random Search**: Baseline comparison method
+- **Multi-objective Optimization**: Pareto frontier for accuracy vs efficiency trade-offs
+- **Stratified Data Generation**: Balanced datasets by root type (real, complex, single)
+- **Comprehensive Evaluation**: MAE, RMSE, R², accuracy, error analysis by root type
+- **Model Efficiency Metrics**: Parameter count, model size, inference speed
+- **Reproducible Experiments**: Fixed random seeds for reproducibility
 
-- **Page 2: Data Generation & Model Presets**
-  - Generate synthetic training data (uniform, stratified, edge cases)
-  - Data quality analysis and visualization
-  - Multiple model presets
+## Quick Start
 
-- **Page 3: Training & Optimization**
-  - Real-time training metrics
-  - **Hyperparameter Optimization**: Run Optuna-based optimization studies
-  - Best models tracker with hyperparameter importance
-  - Training loss and accuracy plots
-  - Model architecture visualization
-
-- **Page 4: Results & Analysis**
-  - Optimization results dashboard
-  - Pareto frontier visualization (multi-objective optimization)
-  - Architecture comparison
-  - Trade-off analysis (accuracy vs size vs speed)
-  - Practical insights and recommendations
-  - Comprehensive error analysis by root type
-
-## Installation
-
-1. Install dependencies:
 ```bash
+# Install dependencies
 pip install -r requirements.txt
+
+# Run quick optimization (20 trials, ~5 minutes)
+python main.py --preset quick
+
+# Run full optimization (100 trials, ~30-60 minutes)
+python main.py --preset full
+
+# Custom experiment
+python main.py --preset quick --trials 50 --epochs 100 --samples 20000
 ```
 
-2. Run the application:
-```bash
-python main.py
-```
+## Available Presets
 
-## Quick Start: Running Optimization
-
-1. **Generate Data** (Page 2):
-   - Set coefficient ranges
-   - Choose data generation strategy (uniform, stratified, edge cases)
-   - Generate training dataset
-
-2. **Run Optimization** (Page 3):
-   - Select optimization preset (quick, full, architecture study, etc.)
-   - Choose optimization method (Optuna, grid search, random search)
-   - Set number of trials and epochs
-   - Start optimization
-
-3. **Analyze Results** (Page 4):
-   - View optimization results table
-   - Examine hyperparameter importance
-   - Analyze Pareto frontiers (for multi-objective)
-   - Review trade-off analysis
-   - Read practical insights
+- `quick` - Fast test (20 trials, 50 epochs, 5000 samples)
+- `full` - Comprehensive search (100 trials, 100 epochs, 20000 samples)
+- `architecture_study` - Focus on architecture hyperparameters
+- `training_study` - Focus on training hyperparameters
+- `random_search` - Random search baseline
+- `multi_objective` - Pareto frontier optimization (loss vs model size)
 
 ## Project Structure
 
 ```
 QEPV2/
-├── main.py                 # Main application entry point
-├── config.py              # Configuration (colors, presets, etc.)
-├── config/
-│   └── optimization_config.py  # Optimization search spaces and presets
-├── RESEARCH.md            # Research documentation
-├── requirements.txt       # Python dependencies
+├── main.py                    # CLI entry point
+├── requirements.txt           # Dependencies
+├── README.md                  # This file
 ├── models/
 │   ├── __init__.py
-│   └── quadratic_model.py # Enhanced neural network model with callbacks
-├── pages/
+│   └── model.py               # Neural network model
+├── utils/
 │   ├── __init__.py
-│   ├── base_page.py       # Base page class
-│   ├── page1_equation.py  # Equation entry page
-│   ├── page2_data_generation.py  # Data generation page
-│   ├── page3_training.py  # Training & optimization page
-│   └── page4_results.py   # Results & analysis page
-└── utils/
+│   ├── data.py                # Data generation (uniform, stratified)
+│   ├── evaluation.py          # Evaluation metrics
+│   ├── optimizer.py           # Optimization methods (Optuna, random, multi-objective)
+│   └── runner.py              # Experiment runner
+└── config/
     ├── __init__.py
-    ├── quadratic_utils.py # Quadratic equation utilities
-    ├── data_generator.py  # Enhanced data generation (stratified, edge cases)
-    ├── evaluation.py      # Comprehensive evaluation framework
-    ├── experiment_runner.py  # Experiment execution and tracking
-    ├── hyperparameter_optimization.py  # Optuna, grid, random search
-    └── visualization.py   # Advanced plotting for optimization results
+    └── search_spaces.py       # Search spaces and presets
 ```
 
-## Key Research Contributions
+## Usage Examples
 
-1. **Systematic Optimization Framework**: Comprehensive hyperparameter search with multiple strategies
-2. **Architecture Insights**: Identification of optimal architectures for mathematical function approximation
-3. **Efficiency Analysis**: Trade-off curves between accuracy, model size, and inference speed
-4. **Practical Guidelines**: Actionable recommendations for optimizing small ML models
+### Basic Optimization
 
-## Results Interpretation
+```bash
+# Quick test
+python main.py --preset quick
 
-### Optimization Results
-- **Best Parameters**: Optimal hyperparameter configuration found
-- **Hyperparameter Importance**: Which parameters matter most for performance
-- **Convergence Plots**: How optimization improved over trials
-- **Pareto Frontiers**: Best models for different objectives (accuracy vs efficiency)
+# Full study
+python main.py --preset full --device cuda  # Use GPU if available
+```
 
-### Practical Insights
-The system automatically generates insights such as:
-- "For 95% accuracy, use architecture X with learning rate Y"
-- "Model size can be reduced by 60% with only 2% accuracy loss"
-- "ReLU outperforms Tanh for this mathematical function"
+### Custom Configuration
 
-## Customization
+```bash
+# Override preset values
+python main.py --preset quick --trials 50 --epochs 150
 
-- **Search Spaces**: Modify `config/optimization_config.py` to define custom search spaces
-- **Experiment Presets**: Add new presets for different optimization studies
-- **Evaluation Metrics**: Configure metric priorities in optimization config
-- **Colors & Theme**: Edit `config.py` for UI customization
+# Use different data strategy
+python main.py --preset full --data-strategy uniform
+
+# Multi-objective optimization
+python main.py --preset multi_objective
+```
+
+## Results
+
+Results are saved as JSON files in the `results/` directory. Each file contains:
+
+- Best hyperparameters found
+- Best loss/objective value
+- All trial results (for random search)
+- Pareto front solutions (for multi-objective)
+- Experiment metadata (trials, epochs, seed, etc.)
 
 ## Requirements
 
 - Python 3.8+
-- PyQt6 >= 6.6.0
 - PyTorch >= 2.1.0
 - NumPy >= 1.24.0
-- Matplotlib >= 3.8.0
-- SymPy >= 1.12
+- Optuna >= 3.4.0
 - scikit-learn >= 1.3.0
-- Optuna >= 3.4.0 (for hyperparameter optimization)
+- Matplotlib >= 3.8.0
 - pandas >= 2.1.0
 
 ## License
 
-MIT License
+MIT

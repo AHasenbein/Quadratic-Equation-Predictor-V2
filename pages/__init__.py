@@ -1,6 +1,3 @@
 """
-Page components for the GUI application.
+Pages package for GUI application.
 """
-
-
-
