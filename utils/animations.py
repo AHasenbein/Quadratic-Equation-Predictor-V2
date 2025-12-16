@@ -94,3 +94,5 @@ def create_notification_toast(parent: QWidget, message: str,
     
     return toast
 
+
+

@@ -83,3 +83,5 @@ def generate_equation_data(a: float, b: float, c: float, x_range: Tuple[float, f
     y = a * x**2 + b * x + c
     return x, y
 
+
+

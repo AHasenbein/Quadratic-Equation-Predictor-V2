@@ -122,3 +122,5 @@ class ResizableGraphWidget(QWidget):
             available_width, available_height, min_width, min_height
         )
 
+
+

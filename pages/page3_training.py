@@ -313,19 +313,19 @@ class TrainingPage(BasePage):
         if not main_window or not hasattr(main_window, 'page2'):
             self.log_text.append("Error: Cannot access data generation page.")
             return
-        
+
         data = main_window.page2.get_generated_data()
         preset = main_window.page2.get_selected_preset()
-        
+
         if data is None:
             self.log_text.append("Error: No data generated. Please generate data first.")
             return
-        
+
         # Split data
         inputs = data['inputs']
         targets = data['targets']
         split_idx = int(len(inputs) * 0.8)
-        
+
         train_data = {
             'inputs': inputs[:split_idx],
             'targets': targets[:split_idx]
@@ -334,19 +334,19 @@ class TrainingPage(BasePage):
             'inputs': inputs[split_idx:],
             'targets': targets[split_idx:]
         }
-        
+
         # Create model
         self.current_model = QuadraticPredictor(hidden_layers=preset['hidden_layers'])
         # Lazy import torch to check for CUDA
         import torch
         device = 'cuda' if torch.cuda.is_available() else 'cpu'
-        
+
         # Start training thread
         self.training_thread = TrainingThread(self.current_model, train_data, val_data, preset, device)
         self.training_thread.epoch_complete.connect(self.on_epoch_complete)
         self.training_thread.training_complete.connect(self.on_training_complete)
         self.training_thread.start()
-        
+
         self.start_btn.setEnabled(False)
         self.stop_btn.setEnabled(True)
         self.progress_bar.setMaximum(preset['epochs'])

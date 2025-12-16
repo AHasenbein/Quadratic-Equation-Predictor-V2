@@ -1,9 +1,10 @@
 """
 Generate synthetic training data for quadratic equations.
+Enhanced with stratified sampling, edge cases, and data quality metrics.
 """
 
 import numpy as np
-from typing import Tuple, Dict
+from typing import Tuple, Dict, List, Optional
 from utils.quadratic_utils import solve_quadratic
 
 
